@@ -1,21 +1,20 @@
 package Client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client {
+
+        //private String userName;
         public static void main(String[] args) {
 
             try {
                 Socket connection = new Socket("localhost",5000);
+                System.out.println(connection.getRemoteSocketAddress());
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
-
+                    Thread t = new Thread(new ServerThread(connection));
+                    t.start();
+                    //t.sleep(500);
 
             } catch (IOException e) {
                 e.printStackTrace();
